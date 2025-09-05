@@ -4,17 +4,255 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pranish Adhikari - Portfolio</title>
-  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.20.15/babel.min.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <style>
     body {
-      font-family: 'Inter', sans-serif;
-    }
-    .scroll-smooth {
+      font-family: 'Inter', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f3f4f6;
+      color: #1f2937;
       scroll-behavior: smooth;
+    }
+    nav {
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 4rem;
+    }
+    .nav-container h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1f2937;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+    .nav-links a {
+      color: #4b5563;
+      text-decoration: none;
+      margin-left: 1rem;
+      font-size: 1rem;
+      transition: color 0.3s, transform 0.3s;
+    }
+    .nav-links a:hover {
+      color: #2563eb;
+      transform: scale(1.05);
+    }
+    section {
+      padding: 5rem 1.5rem;
+    }
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(to right, #3b82f6, #4f46e5);
+      color: #ffffff;
+      text-align: center;
+    }
+    #home h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeInDown 1s forwards;
+    }
+    #home p {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeInUp 1s forwards 0.5s;
+    }
+    #home a {
+      background-color: #ffffff;
+      color: #2563eb;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.3s, transform 0.3s;
+      animation: pulse 2s infinite;
+    }
+    #home a:hover {
+      background-color: #e5e7eb;
+      transform: scale(1.1);
+    }
+    #about, #contact {
+      background-color: #ffffff;
+    }
+    #projects {
+      background-color: #f3f4f6;
+    }
+    h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+    .about-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .about-content p {
+      font-size: 1.125rem;
+      max-width: 700px;
+      margin: 0 auto 1rem;
+    }
+    .about-content p:nth-child(2) {
+      opacity: 0;
+      animation: fadeInRight 1s forwards;
+    }
+    .about-content p:nth-child(3) {
+      opacity: 0;
+      animation: fadeInRight 1s forwards 0.5s;
+    }
+    .projects-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    .project-card {
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s;
+    }
+    .project-card.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .project-card:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      transform: scale(1.05);
+    }
+    .project-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .project-card p {
+      color: #4b5563;
+      margin-bottom: 1rem;
+    }
+    .project-card a {
+      color: #2563eb;
+      text-decoration: none;
+      transition: transform 0.3s;
+    }
+    .project-card a:hover {
+      text-decoration: underline;
+      transform: scale(1.1);
+    }
+    .contact-container {
+      max-width: 32rem;
+      margin: 0 auto;
+    }
+    .contact-container label {
+      display: block;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 0.5rem;
+    }
+    .contact-container label:nth-child(1) {
+      opacity: 0;
+      animation: fadeInLeft 1s forwards;
+    }
+    .contact-container label:nth-child(3) {
+      opacity: 0;
+      animation: fadeInLeft 1s forwards 0.5s;
+    }
+    .contact-container label:nth-child(5) {
+      opacity: 0;
+      animation: fadeInLeft 1s forwards 1s;
+    }
+    .contact-container input,
+    .contact-container textarea {
+      width: 100%;
+      padding: 0.5rem 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .contact-container input:hover,
+    .contact-container textarea:hover {
+      transform: scale(1.05);
+    }
+    .contact-container input:focus,
+    .contact-container textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+    }
+    .contact-container textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    .contact-container button {
+      width: 100%;
+      background-color: #2563eb;
+      color: #ffffff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+      animation: pulse 2s infinite;
+    }
+    .contact-container button:hover {
+      background-color: #1d4ed8;
+      transform: scale(1.1);
+    }
+    footer {
+      background-color: #1f2937;
+      color: #ffffff;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    footer p {
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+    .footer-links a {
+      color: #ffffff;
+      text-decoration: none;
+      margin: 0 1rem;
+      transition: color 0.3s, transform 0.3s;
+    }
+    .footer-links a:nth-child(1) {
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+    }
+    .footer-links a:nth-child(2) {
+      opacity: 0;
+      animation: fadeInUp 1s forwards 0.5s;
+    }
+    .footer-links a:nth-child(3) {
+      opacity: 0;
+      animation: fadeInUp 1s forwards 1s;
+    }
+    .footer-links a:hover {
+      color: #93c5fd;
+      transform: scale(1.1);
     }
     .animate-on-scroll {
       opacity: 0;
@@ -25,191 +263,136 @@
       opacity: 1;
       transform: translateY(0);
     }
-    .project-card {
-      opacity: 0;
-      transform: scale(0.95);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-    .project-card.visible {
-      opacity: 1;
-      transform: scale(1);
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    @media (max-width: 768px) {
+      #home h2 { font-size: 2rem; }
+      #home p { font-size: 1rem; }
+      h2 { font-size: 1.75rem; }
+      .nav-links a { font-size: 0.875rem; margin-left: 0.5rem; }
     }
   </style>
 </head>
-<body className="bg-gray-100 text-gray-800 scroll-smooth">
-  <div id="root"></div>
+<body>
+  <nav>
+    <div class="nav-container">
+      <h1>Pranish Adhikari</h1>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-  <script type="text/babel">
-    function NavBar() {
-      return (
-        <nav className="bg-white shadow-md fixed top-0 w-full z-10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between h-16">
-              <div className="flex items-center">
-                <h1 className="text-2xl font-bold text-gray-900 animate__animated animate__fadeIn">Pranish Adhikari</h1>
-              </div>
-              <div className="flex items-center space-x-4">
-                <a href="#home" className="text-gray-600 hover:text-blue-600 transition transform hover:scale-105">Home</a>
-                <a href="#about" className="text-gray-600 hover:text-blue-600 transition transform hover:scale-105">About</a>
-                <a href="#projects" className="text-gray-600 hover:text-blue-600 transition transform hover:scale-105">Projects</a>
-                <a href="#contact" className="text-gray-600 hover:text-blue-600 transition transform hover:scale-105">Contact</a>
-              </div>
-            </div>
-          </div>
-        </nav>
+  <section id="home">
+    <div>
+      <h2>Hello, I'm Pranish Adhikari</h2>
+      <p>A passionate developer creating modern and innovative solutions</p>
+      <a href="#contact">Get in Touch</a>
+    </div>
+  </section>
+
+  <section id="about" class="animate-on-scroll">
+    <div class="about-content">
+      <h2>About Me</h2>
+      <p>I'm Pranish Adhikari, a dedicated developer with a passion for building user-friendly and innovative web applications. I specialize in modern web technologies and strive to create seamless digital experiences.</p>
+      <p>With a strong foundation in JavaScript, HTML, and CSS, I enjoy tackling complex challenges and delivering high-quality solutions. Let's collaborate to bring your ideas to life!</p>
+    </div>
+  </section>
+
+  <section id="projects" class="animate-on-scroll">
+    <div class="projects-container">
+      <h2>My Projects</h2>
+      <div class="project-card">
+        <h3>Project One</h3>
+        <p>A modern web app built with JavaScript and CSS.</p>
+        <a href="#">View Project</a>
+      </div>
+      <div class="project-card">
+        <h3>Project Two</h3>
+        <p>An e-commerce platform with seamless UI/UX.</p>
+        <a href="#">View Project</a>
+      </div>
+      <div class="project-card">
+        <h3>Project Three</h3>
+        <p>A portfolio website showcasing my skills.</p>
+        <a href="#">View Project</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="animate-on-scroll">
+    <div class="contact-container">
+      <h2>Get in Touch</h2>
+      <div>
+        <label>Name</label>
+        <input type="text" placeholder="Your Name">
+      </div>
+      <div>
+        <label>Email</label>
+        <input type="email" placeholder="Your Email">
+      </div>
+      <div>
+        <label>Message</label>
+        <textarea placeholder="Your Message"></textarea>
+      </div>
+      <button>Send Message</button>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <p>&copy; 2025 Pranish Adhikari. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">LinkedIn</a>
+        <a href="#">GitHub</a>
+        <a href="#">Twitter</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        { threshold: 0.1 }
       );
-    }
 
-    function Hero() {
-      return (
-        <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-indigo-600 text-white animate-on-scroll">
-          <div className="text-center">
-            <h2 className="text-5xl font-extrabold mb-4 animate__animated animate__fadeInDown">Hello, I'm Pranish Adhikari</h2>
-            <p className="text-xl mb-6 animate__animated animate__fadeInUp">A passionate developer creating modern and innovative solutions</p>
-            <a href="#contact" className="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition transform hover:scale-110 animate__animated animate__pulse animate__infinite">Get in Touch</a>
-          </div>
-        </section>
-      );
-    }
-
-    function About() {
-      return (
-        <section id="about" className="py-20 bg-white animate-on-scroll">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-4xl font-bold text-center mb-12 animate__animated animate__fadeIn">About Me</h2>
-            <div className="flex flex-col items-center">
-              <div className="w-full">
-                <p className="text-lg mb-4 animate__animated animate__fadeInRight">
-                  I'm Pranish Adhikari, a dedicated developer with a passion for building user-friendly and innovative web applications. I specialize in modern web technologies and strive to create seamless digital experiences.
-                </p>
-                <p className="text-lg animate__animated animate__fadeInRight animate__delay-1s">
-                  With a strong foundation in JavaScript, React, and Tailwind CSS, I enjoy tackling complex challenges and delivering high-quality solutions. Let's collaborate to bring your ideas to life!
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-      );
-    }
-
-    function Projects() {
-      const projects = [
-        { title: "Project One", description: "A modern web app built with React and Tailwind CSS.", link: "#" },
-        { title: "Project Two", description: "An e-commerce platform with seamless UI/UX.", link: "#" },
-        { title: "Project Three", description: "A portfolio website showcasing my skills.", link: "#" },
-      ];
-
-      React.useEffect(() => {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-              }
-            });
-          },
-          { threshold: 0.1 }
-        );
-
-        document.querySelectorAll('.project-card').forEach((element) => {
-          observer.observe(element);
-        });
-
-        return () => observer.disconnect();
-      }, []);
-
-      return (
-        <section id="projects" className="py-20 bg-gray-100 animate-on-scroll">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-4xl font-bold text-center mb-12 animate__animated animate__fadeIn">My Projects</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {projects.map((project, index) => (
-                <div key={index} className="project-card bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition" style={{ transitionDelay: `${index * 0.2}s` }}>
-                  <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
-                  <p className="text-gray-600 mb-4">{project.description}</p>
-                  <a href={project.link} className="text-blue-600 hover:underline transition transform hover:scale-110">View Project</a>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      );
-    }
-
-    function Contact() {
-      return (
-        <section id="contact" className="py-20 bg-white animate-on-scroll">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-4xl font-bold text-center mb-12 animate__animated animate__fadeIn">Get in Touch</h2>
-            <div className="max-w-lg mx-auto">
-              <div className="mb-4">
-                <label className="block text-gray-700 font-semibold mb-2 animate__animated animate__fadeInLeft">Name</label>
-                <input type="text" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition transform hover:scale-105" placeholder="Your Name" />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 font-semibold mb-2 animate__animated animate__fadeInLeft animate__delay-1s">Email</label>
-                <input type="email" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition transform hover:scale-105" placeholder="Your Email" />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 font-semibold mb-2 animate__animated animate__fadeInLeft animate__delay-2s">Message</label>
-                <textarea className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition transform hover:scale-105" rows="5" placeholder="Your Message"></textarea>
-              </div>
-              <button className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition transform hover:scale-110 animate__animated animate__pulse animate__infinite">Send Message</button>
-            </div>
-          </div>
-        </section>
-      );
-    }
-
-    function Footer() {
-      return (
-        <footer className="bg-gray-900 text-white py-6 animate-on-scroll">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p className="animate__animated animate__fadeIn">&copy; 2025 Pranish Adhikari. All rights reserved.</p>
-            <div className="mt-4 space-x-4">
-              <a href="#" className="hover:text-blue-400 transition transform hover:scale-110 animate__animated animate__fadeInUp">LinkedIn</a>
-              <a href="#" className="hover:text-blue-400 transition transform hover:scale-110 animate__animated animate__fadeInUp animate__delay-1s">GitHub</a>
-              <a href="#" className="hover:text-blue-400 transition transform hover:scale-110 animate__animated animate__fadeInUp animate__delay-2s">Twitter</a>
-            </div>
-          </div>
-        </footer>
-      );
-    }
-
-    function App() {
-      React.useEffect(() => {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-              }
-            });
-          },
-          { threshold: 0.1 }
-        );
-
-        document.querySelectorAll('.animate-on-scroll').forEach((element) => {
-          observer.observe(element);
-        });
-
-        return () => observer.disconnect();
-      }, []);
-
-      return (
-        <div>
-          <NavBar />
-          <Hero />
-          <About />
-          <Projects />
-          <Contact />
-          <Footer />
-        </div>
-      );
-    }
-
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
+      document.querySelectorAll('.animate-on-scroll, .project-card').forEach((element) => {
+        observer.observe(element);
+      });
+    });
   </script>
 </body>
 </html>
